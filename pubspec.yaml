@@ -43,6 +43,15 @@ flutter:
     - family: ucf
       fonts:
         - asset: asset/font/ucf.otf
+    - family: bnd
+      fonts:
+        - asset: asset/font/bnd.ttf
+    - family: aqum
+      fonts:
+        - asset: asset/font/aqum.ttf
+    - family: arma
+      fonts:
+        - asset: asset/font/play.ttf
     - family: play
       fonts:
         - asset: asset/font/play.ttf

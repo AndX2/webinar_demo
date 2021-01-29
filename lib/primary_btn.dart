@@ -59,7 +59,7 @@ class PrimaryBtn extends StatefulWidget {
     Key key,
   }) : super(key: key);
 
-  PrimaryBtn.regilar({
+  PrimaryBtn.regular({
     this.onPressed,
     this.child,
     this.height = _btnHeight,

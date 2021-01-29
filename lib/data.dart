@@ -32,8 +32,8 @@ class ImageRes {
 }
 
 class IconRes {
-  static const _iconAssetPath = 'assets/asset/icon';
-  // static const _iconAssetPath = 'asset/icon';
+  // static const _iconAssetPath = 'assets/asset/icon';
+  static const _iconAssetPath = 'asset/icon';
   static const arch = '$_iconAssetPath/skill_0.svg';
   static const dev = '$_iconAssetPath/skill_1.svg';
   static const anim = '$_iconAssetPath/skill_2.svg';
@@ -48,11 +48,14 @@ class IconRes {
   static const resume = '$_iconAssetPath/resume.svg';
   static const briefcase = '$_iconAssetPath/briefcase.svg';
   static const sert = '$_iconAssetPath/sert.svg';
+  static const message = '$_iconAssetPath/message.svg';
 }
 
 class StyleRes {
   static const content16Blue = TextStyle(fontSize: 16.0, fontFamily: 'play', color: ColorRes.textBlue);
   static const content20Blue = TextStyle(fontSize: 20.0, fontFamily: 'play', color: ColorRes.textBlue);
+  static const content24Blue = TextStyle(fontSize: 24.0, fontFamily: 'play', color: ColorRes.textBlue);
+  static const content32Blue = TextStyle(fontSize: 32.0, fontFamily: 'play', color: ColorRes.textBlue);
   static const content64Blue = TextStyle(fontSize: 64.0, fontFamily: 'play', color: ColorRes.textBlue);
 
   static const head24Red = TextStyle(fontSize: 24.0, fontFamily: 'ucf', color: ColorRes.textRed);

@@ -35,7 +35,7 @@ class _GearLogoState extends State<GearLogo> {
     _scrollController.addListener(() {
       setState(() {
         _angle = _scrollController.offset / 300.0;
-        _opacity = 1.0 - .85 * (min(_scrollController.offset / 100.0, 1.0));
+        _opacity = 1.0 - .85 * (min(_scrollController.offset / 300.0, 1.0));
       });
     });
   }
