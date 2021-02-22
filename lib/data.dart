@@ -32,7 +32,7 @@ class ImageRes {
 }
 
 class IconRes {
-  // static const _iconAssetPath = 'assets/asset/icon';
+  // static const _iconAssetPath = '/assets/asset/icon';
   static const _iconAssetPath = 'asset/icon';
   static const arch = '$_iconAssetPath/skill_0.svg';
   static const dev = '$_iconAssetPath/skill_1.svg';
@@ -58,9 +58,9 @@ class StyleRes {
   static const content32Blue = TextStyle(fontSize: 32.0, fontFamily: 'play', color: ColorRes.textBlue);
   static const content64Blue = TextStyle(fontSize: 64.0, fontFamily: 'play', color: ColorRes.textBlue);
 
-  static const head24Red = TextStyle(fontSize: 24.0, fontFamily: 'ucf', color: ColorRes.textRed);
+  static const head24Red = TextStyle(fontSize: 24.0, fontFamily: 'zelek', color: ColorRes.textRed);
 
-  static const head36Red = TextStyle(fontSize: 36.0, fontFamily: 'ucf', color: ColorRes.textRed);
+  static const head36Red = TextStyle(fontSize: 36.0, fontFamily: 'zelek', color: ColorRes.textRed);
 
-  static const head64Red = TextStyle(fontSize: 64.0, fontFamily: 'ucf', color: ColorRes.textRed);
+  static const head64Red = TextStyle(fontSize: 64.0, fontFamily: 'zelek', color: ColorRes.textRed);
 }

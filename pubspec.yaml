@@ -52,6 +52,9 @@ flutter:
     - family: arma
       fonts:
         - asset: asset/font/play.ttf
+    - family: zelek
+      fonts:
+        - asset: asset/font/zelek.ttf
     - family: play
       fonts:
         - asset: asset/font/play.ttf

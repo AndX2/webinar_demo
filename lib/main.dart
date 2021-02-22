@@ -1,3 +1,4 @@
+import 'dart:html' as html;
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -21,15 +22,40 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        textTheme: TextTheme(
+          headline1: TextStyle(fontSize: 64.0, fontFamily: 'zelek', color: ColorRes.textRed),
+          headline2: TextStyle(fontSize: 36.0, fontFamily: 'zelek', color: ColorRes.textRed),
+        ),
+      ),
       home: MainScreen(),
     );
   }
 }
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   MainScreen({Key key}) : super(key: key);
 
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    final descMeta = html.MetaElement();
+    descMeta.name = 'description';
+    descMeta.content =
+        'Подробное описание контента страницы (для конкретного товара, например)';
+    html.document.head.children.add(descMeta);
+    final keywordsMeta = html.MetaElement();
+    final canonicalMeta = html.MetaElement();
+    final jsonLdMeta = html.MetaElement();
+    //...
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +67,11 @@ class MainScreen extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               stops: [0, .5, 1.0],
-              colors: [ColorRes.backGradientBegin, ColorRes.backGradientCenter, ColorRes.backGradientEnd],
+              colors: [
+                ColorRes.backGradientBegin,
+                ColorRes.backGradientCenter,
+                ColorRes.backGradientEnd,
+              ],
             ),
           ),
           child: Scaffold(
@@ -91,7 +121,7 @@ class MainScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 64.0),
                   child: Text(
                     'Напишите нам',
-                    style: context.sp(StyleRes.head36Red),
+                    style: context.sp(Theme.of(context).textTheme.headline2),
                   ),
                 ),
               ),
@@ -208,7 +238,7 @@ class MainScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Даём основы, раскрываем секреты',
+                    'Даем основы, раскрываем секреты',
                     style: context.sp(StyleRes.head36Red),
                   ),
                   SizedBox(height: context.sw600 ? 16.0 : 48.0),
@@ -313,7 +343,7 @@ class MainScreen extends StatelessWidget {
       constraints: BoxConstraints(maxWidth: context.sw600 ? 300.0 : 520.0),
       child: CornerCard(
         cornerSize: context.sw600 ? 72.0 : 120.0,
-        icon: Text(icon, style: context.sp(StyleRes.head64Red)),
+        icon: Text(icon, style: context.sp(Theme.of(context).textTheme.headline1)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -527,7 +557,7 @@ class MainScreen extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(left: context.sw600 ? 32.0 : 96.0, right: 24.0),
-          child: Text('Учёба дистанционная, но преподаватели рядом', style: context.sp(StyleRes.head36Red)),
+          child: Text('Учеба дистанционная, но преподаватели рядом', style: context.sp(StyleRes.head36Red)),
         ),
         SizedBox(height: context.sw600 ? 16.0 : 48.0),
         _buildEnrollBtn(context),
@@ -962,7 +992,11 @@ class MainScreen extends StatelessWidget {
             SizedBox(height: context.sw600 ? 100.0 : 156.0),
             Text('ПРАКТИЧЕСКИЙ ОНЛАЙН-КУРС', style: context.sp(StyleRes.head24Red)),
             SizedBox(height: context.sw600 ? 8.0 : 16.0),
-            Text('FLUTTER-РАЗРАБОТЧИК', style: context.sp(StyleRes.head64Red)),
+            Text(
+              'FLUTTER-РАЗРАБОТЧИК',
+              style: Theme.of(context).textTheme.headline1,
+              semanticsLabel: 'HeaderSemantic',
+            ),
             SizedBox(height: context.sw600 ? 8.0 : 16.0),
             Text(
                 'Вы изучите язык Dart и фреймворк Flutter.\nНаучитесь создавать современные мобильные\nприложения сразу под две платформы: iOS и Android.',
