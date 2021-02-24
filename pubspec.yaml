@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   youtube_player_flutter: ^7.0.0+7
+  flutter_svg: 0.19.1
 
 dev_dependencies:
   flutter_test:

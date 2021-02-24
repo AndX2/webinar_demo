@@ -2,16 +2,16 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:webinar_demo/conditional/youtube.dart';
 
-import 'package:webinar_demo/corner_card.dart';
+import 'package:webinar_demo/conditional/youtube.dart';
 import 'package:webinar_demo/data.dart';
-import 'package:webinar_demo/gear_logo.dart';
-import 'package:webinar_demo/message_card.dart';
-import 'package:webinar_demo/person_card.dart';
-import 'package:webinar_demo/primary_btn.dart';
-import 'package:webinar_demo/simple_card.dart';
 import 'package:webinar_demo/util.dart';
+import 'package:webinar_demo/widget/corner_card.dart';
+import 'package:webinar_demo/widget/gear_logo.dart';
+import 'package:webinar_demo/widget/message_card.dart';
+import 'package:webinar_demo/widget/person_card.dart';
+import 'package:webinar_demo/widget/primary_btn.dart';
+import 'package:webinar_demo/widget/simple_card.dart';
 
 void main() {
   runApp(App());
@@ -55,9 +55,11 @@ class MainScreen extends StatelessWidget {
                 children: [
                   Align(
                       alignment: Alignment.topLeft,
-                      child: GearLogo(
-                        height: context.sw600 ? 80.0 : 148.0,
-                        width: context.sw600 ? 80.0 : 148.0,
+                      child: SafeArea(
+                        child: GearLogo(
+                          height: context.sw600 ? 80.0 : 148.0,
+                          width: context.sw600 ? 80.0 : 148.0,
+                        ),
                       )),
                   _buildContent(context),
                 ],
@@ -162,7 +164,7 @@ class MainScreen extends StatelessWidget {
         maxHeight: context.sw600 ? 60.0 : 100.0,
       ),
       child: SimpleCard(
-        child: Image.network(
+        child: adaptiveIcon(
           IconRes.message,
           height: double.infinity,
           width: double.infinity,
@@ -176,6 +178,7 @@ class MainScreen extends StatelessWidget {
       child: Builder(builder: (ctx) {
         return ListView(
           controller: MainScrollProvider.of(ctx).scrollController,
+          physics: ClampingScrollPhysics(),
           children: [
             _buildHeader(context),
             SizedBox(height: context.sw600 ? 16.0 : 32.0),
@@ -314,7 +317,7 @@ class MainScreen extends StatelessWidget {
       constraints: BoxConstraints(maxWidth: context.sw600 ? 300.0 : 520.0),
       child: CornerCard(
         cornerSize: context.sw600 ? 72.0 : 120.0,
-        icon: Text(icon, style: context.sp(Theme.of(context).textTheme.headline1)),
+        icon: Text(icon, style: context.sp(StyleRes.head64Red)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -424,7 +427,7 @@ class MainScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('А ещё вы получите', style: context.sp(StyleRes.head36Red)),
+          Text('А еще вы получите', style: context.sp(StyleRes.head36Red)),
           SizedBox(height: context.sw600 ? 16.0 : 48.0),
           Container(
             constraints: BoxConstraints(maxWidth: context.sw600 ? 400.0 : 800.0),
@@ -452,7 +455,7 @@ class MainScreen extends StatelessWidget {
                             children: [
                               ClipPath(
                                 clipper: MessageClipper(),
-                                child: Image.network(
+                                child: adaptiveIcon(
                                   IconRes.sert,
                                   width: context.sw600 ? 240.0 : 300.0,
                                 ),
@@ -499,7 +502,7 @@ class MainScreen extends StatelessWidget {
                             children: [
                               ClipPath(
                                 clipper: MessageClipper(),
-                                child: Image.network(
+                                child: adaptiveIcon(
                                   IconRes.sert,
                                   width: context.sw600 ? 240.0 : 300.0,
                                   fit: BoxFit.fill,
@@ -683,7 +686,7 @@ class MainScreen extends StatelessWidget {
   }
 
   Widget _buildVideoQuality(BuildContext context) {
-    if (!kIsWeb || !Platform.isIOS || !Platform.isAndroid) return Container();
+    if (!kIsWeb && !Platform.isIOS && !Platform.isAndroid) return Container();
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -827,7 +830,7 @@ class MainScreen extends StatelessWidget {
       constraints: BoxConstraints(maxWidth: context.sw600 ? 400.0 : 600.0),
       child: CornerCard(
         cornerSize: context.sw600 ? 64.0 : 96.0,
-        icon: Image.network(
+        icon: adaptiveIcon(
           icon,
           width: context.sw600 ? 48.0 : 72.0,
           height: context.sw600 ? 48.0 : 72.0,

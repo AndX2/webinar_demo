@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:webinar_demo/data.dart';
 import 'package:webinar_demo/main.dart';
+import 'package:webinar_demo/util.dart';
 
 class GearLogo extends StatefulWidget {
   final double height;
@@ -65,12 +66,12 @@ class _GearLogoState extends State<GearLogo> {
               children: [
                 Transform.rotate(
                   angle: _angle,
-                  child: Image.network(
+                  child: adaptiveIcon(
                     IconRes.logo_gear,
                     fit: BoxFit.fill,
                   ),
                 ),
-                Image.network(
+                adaptiveIcon(
                   IconRes.logo_text,
                   fit: BoxFit.fill,
                   color: ColorRes.textRed,
