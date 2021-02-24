@@ -1,4 +1,4 @@
-import 'dart:html' as html;
+// import 'dart:html' as html;
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -7,6 +7,7 @@ import 'package:webinar_demo/data.dart';
 import 'package:webinar_demo/gear_logo.dart';
 import 'package:webinar_demo/i_frame.dart';
 import 'package:webinar_demo/message_card.dart';
+import 'package:webinar_demo/page_frame.dart';
 import 'package:webinar_demo/person_card.dart';
 import 'package:webinar_demo/primary_btn.dart';
 import 'package:webinar_demo/simple_card.dart';
@@ -24,11 +25,16 @@ class App extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         textTheme: TextTheme(
-          headline1: TextStyle(fontSize: 64.0, fontFamily: 'zelek', color: ColorRes.textRed),
+          headline1: TextStyle(fontSize: 48.0, fontFamily: 'zelek', color: ColorRes.textRed),
           headline2: TextStyle(fontSize: 36.0, fontFamily: 'zelek', color: ColorRes.textRed),
         ),
       ),
-      home: MainScreen(),
+      home: OrientationBuilder(builder: (context, orientation) {
+        return MainScrollProvider(
+          orientation: orientation,
+          child: MainScreen(),
+        );
+      }),
     );
   }
 }
@@ -43,17 +49,18 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  List<Widget> _pageList;
+
   @override
   void initState() {
     super.initState();
-    final descMeta = html.MetaElement();
-    descMeta.name = 'description';
-    descMeta.content =
-        'Подробное описание контента страницы (для конкретного товара, например)';
-    html.document.head.children.add(descMeta);
-    final keywordsMeta = html.MetaElement();
-    final canonicalMeta = html.MetaElement();
-    final jsonLdMeta = html.MetaElement();
+    // final descMeta = html.MetaElement();
+    // descMeta.name = 'description';
+    // descMeta.content = 'Подробное описание контента страницы (для конкретного товара, например)';
+    // html.document.head.children.add(descMeta);
+    // final keywordsMeta = html.MetaElement();
+    // final canonicalMeta = html.MetaElement();
+    // final jsonLdMeta = html.MetaElement();
     //...
   }
 
@@ -79,22 +86,169 @@ class _MainScreenState extends State<MainScreen> {
             floatingActionButton: _buldFab(context),
             endDrawer: _buildEndDrawer(context),
             backgroundColor: Colors.transparent,
-            body: MainScrollProvider(
-              child: Stack(
-                children: [
-                  Align(
-                      alignment: Alignment.topLeft,
-                      child: GearLogo(
-                        height: context.sw600 ? 80.0 : 148.0,
-                        width: context.sw600 ? 80.0 : 148.0,
-                      )),
-                  _buildContent(context),
-                ],
-              ),
+            body: Stack(
+              children: [
+                Align(
+                    alignment: Alignment.topLeft,
+                    child: GearLogo(
+                      height: context.sw600 ? 80.0 : 130.0,
+                      width: context.sw600 ? 80.0 : 130.0,
+                    )),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Image.network(
+                    IconRes.mainLogo,
+                    height: context.sw600 ? 120.0 : 320.0,
+                    width: context.sw600 ? 120.0 : 320.0,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Image.network(
+                    IconRes.bottomFacet,
+                    width: double.infinity,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                _buildContent(context),
+              ],
             ),
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildContent(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: context.sw600 ? 120.0 : 186.0,
+        bottom: context.sw600 ? 40.0 : 64.0,
+      ),
+      child: Builder(builder: (ctx) {
+        _pageList = [
+          _buildHeader(context),
+          _buildBenefits(context),
+          _buildSkills(context),
+          _buildProps(context),
+          // _buildVideoQuality(context),
+          // _buildLectures(context),
+          // _buildEnrollBtn2(context),
+          // _buildAfterCourse(context),
+          // _buildSert(context),
+          // _buildMentors(context),
+          // _buildTargets(context),
+          // _buildEnrollBtn(context),
+          // _buildBasics(context),
+        ];
+        return PageView.builder(
+          physics: BouncingScrollPhysics(),
+          controller: MainScrollProvider.of(ctx).pageController,
+          itemCount: _pageList.length,
+          itemBuilder: (_, index) => Padding(
+            padding: EdgeInsets.only(right: context.sw600 ? 24.0 : 40.0),
+            child: PageFrame(
+              index: index,
+              child: _pageList[index],
+            ),
+          ),
+        );
+        // ListView(
+        //   controller: MainScrollProvider.of(ctx).scrollController,
+        //   children: [
+        //     _buildHeader(context),
+        //     SizedBox(height: context.sw600 ? 16.0 : 32.0),
+        //     _buildEnrollBtn(context),
+        //     SizedBox(height: context.sw600 ? 64.0 : 96.0),
+        //     _buildBenefits(context),
+        //     SizedBox(height: context.sw600 ? 64.0 : 96.0),
+        //     _buildSkills(context),
+        //     SizedBox(height: context.sw600 ? 64.0 : 96.0),
+        //     _buildProps(context),
+        //     SizedBox(height: context.sw600 ? 64.0 : 96.0),
+        //     _buildVideoQuality(context),
+        //     SizedBox(height: context.sw600 ? 64.0 : 96.0),
+        //     _buildLectures(context),
+        //     SizedBox(height: context.sw600 ? 64.0 : 96.0),
+        //     _buildEnrollBtn2(context),
+        //     SizedBox(height: context.sw600 ? 64.0 : 96.0),
+        //     _buildAfterCourse(context),
+        //     SizedBox(height: context.sw600 ? 64.0 : 96.0),
+        //     _buildSert(context),
+        //     SizedBox(height: context.sw600 ? 64.0 : 96.0),
+        //     _buildMentors(context),
+        //     SizedBox(height: context.sw600 ? 64.0 : 96.0),
+        //     _buildTargets(context),
+        //     SizedBox(height: context.sw600 ? 64.0 : 96.0),
+        //     _buildEnrollBtn(context),
+        //     SizedBox(height: context.sw600 ? 64.0 : 96.0),
+        //     _buildBasics(context),
+        //     SizedBox(height: context.sw600 ? 64.0 : 96.0),
+        //   ],
+        // );
+      }),
+    );
+  }
+
+  Widget _buildBasics(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(left: context.sw600 ? 32.0 : 96.0, right: 24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Даем основы, раскрываем секреты',
+            style: context.sp(StyleRes.head36Red),
+          ),
+          SizedBox(height: context.sw600 ? 16.0 : 48.0),
+          Align(
+            alignment: Alignment.topRight,
+            child: MessageCard(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: context.sw600 ? 220.0 : 360.0,
+                    child: Text(
+                      'Узнайте Flutter поближе и сделайте первые шаги во Flutter-разработке',
+                      textAlign: TextAlign.right,
+                      style: context.sp(StyleRes.content20Blue),
+                    ),
+                  ),
+                  if (!context.sw600) SizedBox(width: 20.0)
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: context.sw600 ? 16.0 : 48.0),
+          Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 40.0,
+            runSpacing: 40.0,
+            children: [
+              _buildTargetCard(
+                context,
+                '10',
+                'мастер-классов',
+                'задать вопросы,\nпоработать над\nнешаблонными заданиями',
+              ),
+              _buildTargetCard(
+                context,
+                '48',
+                'видеоуроков\n',
+                'познакомиться с\nтеорией',
+              ),
+              _buildTargetCard(
+                context,
+                '57',
+                'домашних заданий',
+                'применить знания\nна практике',
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -197,103 +351,6 @@ class _MainScreenState extends State<MainScreen> {
           width: double.infinity,
         ),
       ),
-    );
-  }
-
-  Widget _buildContent(BuildContext context) {
-    return Positioned.fill(
-      child: Builder(builder: (ctx) {
-        return ListView(
-          controller: MainScrollProvider.of(ctx).scrollController,
-          children: [
-            _buildHeader(context),
-            SizedBox(height: context.sw600 ? 16.0 : 32.0),
-            _buildEnrollBtn(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildBenefits(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildSkills(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildProps(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildVideoQuality(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildLectures(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildEnrollBtn2(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildAfterCourse(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildSert(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildMentors(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildTargets(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildEnrollBtn(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            Padding(
-              padding: EdgeInsets.only(left: context.sw600 ? 32.0 : 96.0, right: 24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Даем основы, раскрываем секреты',
-                    style: context.sp(StyleRes.head36Red),
-                  ),
-                  SizedBox(height: context.sw600 ? 16.0 : 48.0),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: MessageCard(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(
-                            width: context.sw600 ? 220.0 : 360.0,
-                            child: Text(
-                              'Узнайте Flutter поближе и сделайте первые шаги во Flutter-разработке',
-                              textAlign: TextAlign.right,
-                              style: context.sp(StyleRes.content20Blue),
-                            ),
-                          ),
-                          if (!context.sw600) SizedBox(width: 20.0)
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: context.sw600 ? 16.0 : 48.0),
-                  Wrap(
-                    alignment: WrapAlignment.center,
-                    spacing: 40.0,
-                    runSpacing: 40.0,
-                    children: [
-                      _buildTargetCard(
-                        context,
-                        '10',
-                        'мастер-классов',
-                        'задать вопросы,\nпоработать над\nнешаблонными заданиями',
-                      ),
-                      _buildTargetCard(
-                        context,
-                        '48',
-                        'видеоуроков\n',
-                        'познакомиться с\nтеорией',
-                      ),
-                      _buildTargetCard(
-                        context,
-                        '57',
-                        'домашних заданий',
-                        'применить знания\nна практике',
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-          ],
-        );
-      }),
     );
   }
 
@@ -776,83 +833,96 @@ class _MainScreenState extends State<MainScreen> {
   Widget _buildProps(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: context.sw600 ? 32.0 : 96.0, right: 24.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Surf — эксперт во Flutter', style: context.sp(StyleRes.head36Red)),
-          SizedBox(height: context.sw600 ? 16.0 : 48.0),
-          Wrap(
-            alignment: WrapAlignment.center,
-            spacing: 40.0,
-            runSpacing: 40.0,
-            children: [
-              _buildSkillCard(context, IconRes.aware, '\n',
-                  desc: 'Surf одним из первых в России начал использовать в разработке технологию Flutter.'),
-              _buildSkillCard(context, IconRes.power, '\n',
-                  desc:
-                      'Реализовали на Flutter большие e-commerce и банковские проекты: среди них приложения для Росбанка, сети аптек «Ригла», ресторанов KFC.'),
-              _buildSkillCard(context, IconRes.activity, '\n', desc: '''У Surf наработана большая база знаний:
+      child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 24.0),
+            Text('Surf — эксперт во Flutter', style: context.sp(StyleRes.content24Accent)),
+            SizedBox(height: context.sw600 ? 16.0 : 48.0),
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 40.0,
+              runSpacing: 40.0,
+              children: [
+                _buildSkillCard(context, IconRes.aware, '\n',
+                    desc: 'Surf одним из первых в России начал использовать в разработке технологию Flutter.'),
+                _buildSkillCard(context, IconRes.power, '\n',
+                    desc:
+                        'Реализовали на Flutter большие e-commerce и банковские проекты: среди них приложения для Росбанка, сети аптек «Ригла», ресторанов KFC.'),
+                _buildSkillCard(context, IconRes.activity, '\n', desc: '''У Surf наработана большая база знаний:
 • пишем статьи о технических тонкостях,
 • обучаем студентов-стажёров для найма в компанию,
 • делимся библиотеками и наработками по Flutter в публичном репозитории на Github.'''),
-            ],
-          ),
-          SizedBox(height: context.sw600 ? 16.0 : 32.0),
-          Align(
-              alignment: Alignment.bottomRight,
-              child: MessageCard(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(
-                      width: context.sw600 ? 220.0 : 300.0,
-                      child: Text(
-                        'Мы расскажем всё, что знаем о Flutter сами. Без утайки!',
-                        textAlign: TextAlign.right,
-                        style: context.sp(StyleRes.content16Blue),
+              ],
+            ),
+            SizedBox(height: context.sw600 ? 16.0 : 32.0),
+            Align(
+                alignment: Alignment.bottomRight,
+                child: MessageCard(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        width: context.sw600 ? 220.0 : 300.0,
+                        child: Text(
+                          'Мы расскажем всё, что знаем о Flutter сами. Без утайки!',
+                          textAlign: TextAlign.right,
+                          style: context.sp(StyleRes.content16Blue),
+                        ),
                       ),
-                    ),
-                    if (!context.sw600) SizedBox(width: 20.0)
-                  ],
-                ),
-              ))
-        ],
+                      if (!context.sw600) SizedBox(width: 20.0)
+                    ],
+                  ),
+                )),
+            SizedBox(height: 24.0),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildSkills(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: context.sw600 ? 32.0 : 96.0, right: 24.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Опытные Flutter-разработчики научат', style: context.sp(StyleRes.head36Red)),
-          SizedBox(height: context.sw600 ? 16.0 : 48.0),
-          Wrap(
-            alignment: WrapAlignment.center,
-            spacing: 40.0,
-            runSpacing: 40.0,
-            children: [
-              _buildSkillCard(context, IconRes.arch, '1. Проектировать архитектуру',
-                  desc: 'кроссплатформенных приложений'),
-              _buildSkillCard(context, IconRes.dev, '2. Разрабатывать приложения', desc: 'на Dart и Flutter'),
-              _buildSkillCard(context, IconRes.anim, '3. Делать красивые анимации', desc: 'интерфейса'),
-              _buildSkillCard(context, IconRes.net, '4. Работать с сетью\n', desc: 'и хранением данных'),
-              _buildSkillCard(context, IconRes.inter, '5. Строить взаимодействие',
-                  desc: 'с платформой внутри фреймворка'),
-              _buildSkillCard(context, IconRes.release, '6. Готовить к релизу\n',
-                  desc: 'полноценное кроссплатформенное приложение'),
-            ],
-          ),
-        ],
+      padding: EdgeInsets.only(
+        left: context.sw600 ? 32.0 : 96.0,
+        right: 24.0,
+      ),
+      child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 24.0),
+            Text('Опытные Flutter-разработчики научат', style: context.sp(StyleRes.content24Accent)),
+            SizedBox(height: context.sw600 ? 16.0 : 48.0),
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 40.0,
+              runSpacing: 40.0,
+              children: [
+                _buildSkillCard(context, IconRes.arch, '1. Проектировать архитектуру',
+                    desc: 'кроссплатформенных приложений'),
+                _buildSkillCard(context, IconRes.dev, '2. Разрабатывать приложения', desc: 'на Dart и Flutter'),
+                _buildSkillCard(context, IconRes.anim, '3. Делать красивые анимации', desc: 'интерфейса'),
+                _buildSkillCard(context, IconRes.net, '4. Работать с сетью\n', desc: 'и хранением данных'),
+                _buildSkillCard(context, IconRes.inter, '5. Строить взаимодействие',
+                    desc: 'с платформой внутри фреймворка'),
+                _buildSkillCard(context, IconRes.release, '6. Готовить к релизу\n',
+                    desc: 'полноценное кроссплатформенное приложение'),
+              ],
+            ),
+            SizedBox(height: 24.0),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildSkillCard(BuildContext context, String icon, String title, {String desc}) {
     return Container(
-      constraints: BoxConstraints(maxWidth: context.sw600 ? 400.0 : 600.0),
+      constraints: BoxConstraints(maxWidth: context.sw600 ? 400.0 : 400.0),
       child: CornerCard(
         cornerSize: context.sw600 ? 64.0 : 96.0,
         icon: Image.network(
@@ -869,7 +939,7 @@ class _MainScreenState extends State<MainScreen> {
               padding: EdgeInsets.only(
                 left: context.sw600 ? 64.0 : 96.0,
               ),
-              child: Text(title, style: context.sp(StyleRes.head24Red)),
+              child: Text(title, style: context.sp(StyleRes.content24Accent)),
             ),
             if (desc != null)
               Divider(
@@ -889,38 +959,42 @@ class _MainScreenState extends State<MainScreen> {
   Widget _buildBenefits(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: context.sw600 ? 32.0 : 96.0, right: 24.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Преимущества курса', style: context.sp(StyleRes.head36Red)),
-          SizedBox(height: context.sw600 ? 16.0 : 48.0),
-          Wrap(
-            alignment: WrapAlignment.center,
-            spacing: 40.0,
-            runSpacing: 40.0,
-            children: [
-              _buildBenefitCard(
-                context,
-                'Преподаватели-практики',
-                'Курс ведут разработчики Surf, которые каждый день решают реальные задачи на Flutter.',
-                Icons.build_circle_sharp,
-              ),
-              _buildBenefitCard(
-                context,
-                'Погружение в реальную разработку',
-                'Предоставляем дизайн в Figma для задач по вëрстке и сервер для реализации клиент-серверного взаимодействия.',
-                Icons.insights_outlined,
-              ),
-              _buildBenefitCard(
-                context,
-                'Много обратной связи',
-                'Отвечаем на все вопросы в чате и поддерживаем каждого студента.',
-                Icons.reply_all_rounded,
-              ),
-            ],
-          ),
-          SizedBox(height: context.sw600 ? 16.0 : 48.0),
-        ],
+      child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 24.0),
+            Text('Преимущества курса', style: context.sp(StyleRes.content24Accent)),
+            SizedBox(height: context.sw600 ? 16.0 : 48.0),
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 40.0,
+              runSpacing: 40.0,
+              children: [
+                _buildBenefitCard(
+                  context,
+                  'Преподаватели-практики',
+                  'Курс ведут разработчики Surf, которые каждый день решают реальные задачи на Flutter.',
+                  Icons.build_circle_sharp,
+                ),
+                _buildBenefitCard(
+                  context,
+                  'Погружение в реальную разработку',
+                  'Предоставляем дизайн в Figma для задач по вëрстке и сервер для реализации клиент-серверного взаимодействия.',
+                  Icons.insights_outlined,
+                ),
+                _buildBenefitCard(
+                  context,
+                  'Много обратной связи',
+                  'Отвечаем на все вопросы в чате и поддерживаем каждого студента.',
+                  Icons.reply_all_rounded,
+                ),
+              ],
+            ),
+            SizedBox(height: 24.0),
+          ],
+        ),
       ),
     );
   }
@@ -932,11 +1006,11 @@ class _MainScreenState extends State<MainScreen> {
     IconData icon,
   ) {
     return Container(
-      constraints: BoxConstraints(maxWidth: context.sw600 ? 400.0 : 600.0),
+      constraints: BoxConstraints(maxWidth: context.sw600 ? 400.0 : 400.0),
       child: CornerCard(
         icon: Icon(
           icon,
-          color: ColorRes.textRed,
+          color: ColorRes.textBlue,
           size: 48.0,
         ),
         child: Column(
@@ -945,7 +1019,7 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 64.0),
-              child: Text(title, style: context.sp(StyleRes.head24Red)),
+              child: Text(title, style: context.sp(StyleRes.content24Accent)),
             ),
             Divider(
               color: ColorRes.btnBackRed,
@@ -984,33 +1058,40 @@ class _MainScreenState extends State<MainScreen> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(width: context.sw600 ? 32.0 : 96.0),
+        SizedBox(width: context.sw600 ? 32.0 : 64.0),
         Expanded(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: context.sw600 ? 100.0 : 156.0),
-            Text('ПРАКТИЧЕСКИЙ ОНЛАЙН-КУРС', style: context.sp(StyleRes.head24Red)),
+            SizedBox(height: 40.0),
+            Text('ПРАКТИЧЕСКИЙ ОНЛАЙН-КУРС', style: context.sp(StyleRes.content24Accent)),
             SizedBox(height: context.sw600 ? 8.0 : 16.0),
             Text(
               'FLUTTER-РАЗРАБОТЧИК',
-              style: Theme.of(context).textTheme.headline1,
-              semanticsLabel: 'HeaderSemantic',
+              style: context.sp(StyleRes.head64Red),
             ),
             SizedBox(height: context.sw600 ? 8.0 : 16.0),
             Text(
                 'Вы изучите язык Dart и фреймворк Flutter.\nНаучитесь создавать современные мобильные\nприложения сразу под две платформы: iOS и Android.',
                 style: context.sp(StyleRes.content20Blue)),
+            Spacer(),
+            PrimaryBtn.legendary(
+              onPressed: () {},
+              height: context.sw600 ? 72.0 : 108.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('ЗАПИСАТЬСЯ НА КУРС', style: context.sp(StyleRes.head24Red)),
+                  SizedBox(height: context.sw600 ? 2.0 : 8.0),
+                  Text('Старт занятий 5 марта 2021', style: context.sp(StyleRes.content20Blue)),
+                ],
+              ),
+            ),
+            SizedBox(height: context.sw600 ? 64.0 : 40.0),
           ],
         )),
-        if (context.sw600) SizedBox(width: 24.0),
-        if (!context.sw600)
-          Image.asset(
-            ImageRes.mainHeaderSuffix,
-            width: min(context.scWidth * .25, 400.0),
-            height: min(context.scWidth * .25, 400.0),
-            fit: BoxFit.cover,
-          ),
+        SizedBox(width: context.sw600 ? 32.0 : 64.0),
       ],
     );
   }
@@ -1018,9 +1099,12 @@ class _MainScreenState extends State<MainScreen> {
 
 class MainScrollProvider extends InheritedWidget {
   final ScrollController scrollController;
+  final PageController pageController;
+  final Orientation orientation;
 
-  MainScrollProvider({Key key, this.child})
+  MainScrollProvider({Key key, this.child, this.orientation})
       : scrollController = ScrollController(),
+        pageController = PageController(viewportFraction: orientation == Orientation.landscape ? .75 : .9),
         super(key: key, child: child);
 
   final Widget child;

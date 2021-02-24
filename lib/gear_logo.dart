@@ -68,12 +68,13 @@ class _GearLogoState extends State<GearLogo> {
                   child: Image.network(
                     IconRes.logo_gear,
                     fit: BoxFit.fill,
+                    color: ColorRes.textBlue,
                   ),
                 ),
                 Image.network(
                   IconRes.logo_text,
                   fit: BoxFit.fill,
-                  color: ColorRes.textRed,
+                  color: ColorRes.textBlue,
                 ),
               ],
             ),

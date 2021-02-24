@@ -3,7 +3,7 @@ import 'package:webinar_demo/data.dart';
 import 'package:webinar_demo/util.dart';
 
 const _btnHeight = 104.0;
-const _btnPadding = const EdgeInsets.symmetric(horizontal: 36.0, vertical: 12.0);
+const _btnPadding = const EdgeInsets.symmetric(horizontal: 32.0, vertical: 12.0);
 const _upPathShift = 12.0;
 
 class PrimaryBtn extends StatefulWidget {

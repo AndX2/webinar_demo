@@ -10,8 +10,8 @@ class ColorRes {
   static const backGradientCenter = Color(0xFF110F14);
   static const backGradientEnd = Color(0xFF060E13);
 
-  static const textRed = Colors.red;
-  static const textBlue = Color(0xFF54DFE7);
+  static const textRed = Color(0xFFF6EF00);
+  static const textBlue = Color(0xFF02D7F2);
   static const textWhite = Color(0xFFE4E3E4);
 
   static const btnBackRed = Color(0x40F44336);
@@ -49,6 +49,8 @@ class IconRes {
   static const briefcase = '$_iconAssetPath/briefcase.svg';
   static const sert = '$_iconAssetPath/sert.svg';
   static const message = '$_iconAssetPath/message.svg';
+  static const mainLogo = '$_iconAssetPath/main_logo.svg';
+  static const bottomFacet = '$_iconAssetPath/bottom_facet.svg';
 }
 
 class StyleRes {
@@ -58,9 +60,11 @@ class StyleRes {
   static const content32Blue = TextStyle(fontSize: 32.0, fontFamily: 'play', color: ColorRes.textBlue);
   static const content64Blue = TextStyle(fontSize: 64.0, fontFamily: 'play', color: ColorRes.textBlue);
 
+  static const content24Accent = TextStyle(fontSize: 24.0, fontFamily: 'play', color: ColorRes.textRed);
+
   static const head24Red = TextStyle(fontSize: 24.0, fontFamily: 'zelek', color: ColorRes.textRed);
 
   static const head36Red = TextStyle(fontSize: 36.0, fontFamily: 'zelek', color: ColorRes.textRed);
 
-  static const head64Red = TextStyle(fontSize: 64.0, fontFamily: 'zelek', color: ColorRes.textRed);
+  static const head64Red = TextStyle(fontSize: 48.0, fontFamily: 'zelek', color: ColorRes.textRed);
 }

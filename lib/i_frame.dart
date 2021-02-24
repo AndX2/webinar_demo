@@ -11,6 +11,7 @@ class IframeScreen extends StatefulWidget {
   @override
   _IframeScreenState createState() => _IframeScreenState();
 }
+
 class _IframeScreenState extends State<IframeScreen> {
   Widget _iframeWidget;
   final IFrameElement _iframeElement = IFrameElement();
