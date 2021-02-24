@@ -1,11 +1,12 @@
-import 'dart:html' as html;
+import 'dart:io';
 import 'dart:math';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:webinar_demo/conditional/youtube.dart';
+
 import 'package:webinar_demo/corner_card.dart';
 import 'package:webinar_demo/data.dart';
 import 'package:webinar_demo/gear_logo.dart';
-import 'package:webinar_demo/i_frame.dart';
 import 'package:webinar_demo/message_card.dart';
 import 'package:webinar_demo/person_card.dart';
 import 'package:webinar_demo/primary_btn.dart';
@@ -22,41 +23,12 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        textTheme: TextTheme(
-          headline1: TextStyle(fontSize: 64.0, fontFamily: 'zelek', color: ColorRes.textRed),
-          headline2: TextStyle(fontSize: 36.0, fontFamily: 'zelek', color: ColorRes.textRed),
-        ),
-      ),
       home: MainScreen(),
     );
   }
 }
 
-class MainScreen extends StatefulWidget {
-  MainScreen({Key key}) : super(key: key);
-
-  @override
-  _MainScreenState createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-    final descMeta = html.MetaElement();
-    descMeta.name = 'description';
-    descMeta.content =
-        'Подробное описание контента страницы (для конкретного товара, например)';
-    html.document.head.children.add(descMeta);
-    final keywordsMeta = html.MetaElement();
-    final canonicalMeta = html.MetaElement();
-    final jsonLdMeta = html.MetaElement();
-    //...
-  }
-
+class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -75,7 +47,6 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           child: Scaffold(
-            key: scaffoldKey,
             floatingActionButton: _buldFab(context),
             endDrawer: _buildEndDrawer(context),
             backgroundColor: Colors.transparent,
@@ -121,7 +92,7 @@ class _MainScreenState extends State<MainScreen> {
                   padding: const EdgeInsets.only(top: 64.0),
                   child: Text(
                     'Напишите нам',
-                    style: context.sp(Theme.of(context).textTheme.headline2),
+                    style: context.sp(StyleRes.head36Red),
                   ),
                 ),
               ),
@@ -712,6 +683,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget _buildVideoQuality(BuildContext context) {
+    if (!kIsWeb || !Platform.isIOS || !Platform.isAndroid) return Container();
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -761,7 +733,7 @@ class _MainScreenState extends State<MainScreen> {
             return SizedBox(
               height: height,
               width: width,
-              child: IframeScreen(
+              child: YoutubeWidget(
                 height: height,
                 width: width,
                 url: 'https://www.youtube.com/embed/Yw4srSTb5SA',
@@ -994,7 +966,7 @@ class _MainScreenState extends State<MainScreen> {
             SizedBox(height: context.sw600 ? 8.0 : 16.0),
             Text(
               'FLUTTER-РАЗРАБОТЧИК',
-              style: Theme.of(context).textTheme.headline1,
+              style: context.sp(StyleRes.head64Red),
               semanticsLabel: 'HeaderSemantic',
             ),
             SizedBox(height: context.sw600 ? 8.0 : 16.0),
