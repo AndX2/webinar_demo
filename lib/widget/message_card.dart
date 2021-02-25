@@ -8,9 +8,13 @@ const _strokeWidth = 1.0;
 
 class MessageCard extends StatelessWidget {
   final Widget child;
+  final EdgeInsets padding;
+  final Color background;
   const MessageCard({
     Key key,
     this.child,
+    this.padding,
+    this.background,
   }) : super(key: key);
 
   @override
@@ -21,7 +25,7 @@ class MessageCard extends StatelessWidget {
             child: ClipPath(
           clipper: MessageClipper(),
           child: Container(
-            color: ColorRes.msgBackBlue,
+            color: background ?? ColorRes.msgBackBlue,
           ),
         )),
         Positioned.fill(
@@ -29,7 +33,7 @@ class MessageCard extends StatelessWidget {
           painter: MessagePainter(),
         )),
         Padding(
-          padding: const EdgeInsets.fromLTRB(24.0, 20.0, _messageRightPart + 16.0, 12.0),
+          padding: padding ?? const EdgeInsets.fromLTRB(24.0, 20.0, _messageRightPart + 16.0, 12.0),
           child: child ?? Container(),
         ),
       ],

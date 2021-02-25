@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ColorRes {
@@ -63,8 +62,33 @@ class StyleRes {
   static const content56Blue = TextStyle(fontSize: 56.0, fontFamily: 'play', color: ColorRes.textBlue);
 
   static const head24Title = TextStyle(fontSize: 24.0, fontFamily: 'play', color: ColorRes.textYellow);
-
   static const head36Title = TextStyle(fontSize: 36.0, fontFamily: 'play', color: ColorRes.textYellow);
-
+  static const head40Title = TextStyle(fontSize: 40.0, fontFamily: 'play', color: ColorRes.textYellow);
   static const head56Title = TextStyle(fontSize: 56.0, fontFamily: 'zelek', color: ColorRes.textYellow);
 }
+
+final themeData = ThemeData(
+  inputDecorationTheme: InputDecorationTheme(
+      contentPadding: const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 10.0),
+      filled: true,
+      fillColor: ColorRes.msgBackBlue,
+      focusedBorder: UnderlineInputBorder(borderSide: BorderSide.none),
+      errorStyle: StyleRes.content20Blue.copyWith(color: ColorRes.textRed),
+      enabledBorder: UnderlineInputBorder(
+        borderRadius: BorderRadius.zero,
+        borderSide: const BorderSide(color: Colors.transparent),
+      ),
+      focusedErrorBorder: UnderlineInputBorder(
+        borderRadius: BorderRadius.zero,
+        borderSide: const BorderSide(color: ColorRes.textRed),
+      ),
+      border: UnderlineInputBorder(
+        borderRadius: BorderRadius.zero,
+        borderSide: const BorderSide(color: Colors.transparent),
+      ),
+      errorBorder: UnderlineInputBorder(
+        borderRadius: BorderRadius.zero,
+        borderSide: const BorderSide(color: ColorRes.textRed),
+      ),
+      labelStyle: StyleRes.content24Blue),
+);
