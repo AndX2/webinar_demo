@@ -69,12 +69,13 @@ class _GearLogoState extends State<GearLogo> {
                   child: adaptiveIcon(
                     IconRes.logo_gear,
                     fit: BoxFit.fill,
+                    color: ColorRes.iconBlue,
                   ),
                 ),
                 adaptiveIcon(
                   IconRes.logo_text,
                   fit: BoxFit.fill,
-                  color: ColorRes.textRed,
+                  color: ColorRes.iconBlue,
                 ),
               ],
             ),

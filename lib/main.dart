@@ -94,7 +94,7 @@ class MainScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 64.0),
                   child: Text(
                     'Напишите нам',
-                    style: context.sp(StyleRes.head36Red),
+                    style: context.sp(StyleRes.head36Title),
                   ),
                 ),
               ),
@@ -213,7 +213,7 @@ class MainScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Даем основы, раскрываем секреты',
-                    style: context.sp(StyleRes.head36Red),
+                    style: context.sp(StyleRes.head36Title),
                   ),
                   SizedBox(height: context.sw600 ? 16.0 : 48.0),
                   Align(
@@ -279,7 +279,7 @@ class MainScreen extends StatelessWidget {
         children: [
           Text(
             'Обучение длится 4 месяца',
-            style: context.sp(StyleRes.head36Red),
+            style: context.sp(StyleRes.head36Title),
           ),
           SizedBox(height: context.sw600 ? 16.0 : 48.0),
           Wrap(
@@ -317,14 +317,14 @@ class MainScreen extends StatelessWidget {
       constraints: BoxConstraints(maxWidth: context.sw600 ? 300.0 : 520.0),
       child: CornerCard(
         cornerSize: context.sw600 ? 72.0 : 120.0,
-        icon: Text(icon, style: context.sp(StyleRes.head64Red)),
+        icon: Text(icon, style: context.sp(StyleRes.head56Title)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: EdgeInsets.only(left: context.sw600 ? 56.0 : 112.0),
-              child: Text(title, style: context.sp(StyleRes.head36Red)),
+              child: Text(title, style: context.sp(StyleRes.head36Title)),
             ),
             Divider(
               color: ColorRes.textRed,
@@ -349,7 +349,7 @@ class MainScreen extends StatelessWidget {
         children: [
           Text(
             'Ваши преподаватели — лучшие разработчики Flutter в России',
-            style: context.sp(StyleRes.head36Red),
+            style: context.sp(StyleRes.head36Title),
           ),
           SizedBox(height: context.sw600 ? 16.0 : 48.0),
           Wrap(
@@ -427,7 +427,7 @@ class MainScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('А еще вы получите', style: context.sp(StyleRes.head36Red)),
+          Text('А еще вы получите', style: context.sp(StyleRes.head36Title)),
           SizedBox(height: context.sw600 ? 16.0 : 48.0),
           Container(
             constraints: BoxConstraints(maxWidth: context.sw600 ? 400.0 : 800.0),
@@ -531,7 +531,7 @@ class MainScreen extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(left: context.sw600 ? 32.0 : 96.0, right: 24.0),
-          child: Text('Учеба дистанционная, но преподаватели рядом', style: context.sp(StyleRes.head36Red)),
+          child: Text('Учеба дистанционная, но преподаватели рядом', style: context.sp(StyleRes.head36Title)),
         ),
         SizedBox(height: context.sw600 ? 16.0 : 48.0),
         _buildEnrollBtn(context),
@@ -545,7 +545,7 @@ class MainScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Помощь с трудоустройством после окончания курса', style: context.sp(StyleRes.head36Red)),
+          Text('Помощь с трудоустройством после окончания курса', style: context.sp(StyleRes.head36Title)),
           SizedBox(height: context.sw600 ? 16.0 : 48.0),
           Wrap(
             alignment: WrapAlignment.center,
@@ -579,7 +579,7 @@ class MainScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Как проходит обучение', style: context.sp(StyleRes.head36Red)),
+          Text('Как проходит обучение', style: context.sp(StyleRes.head36Title)),
           SizedBox(height: context.sw600 ? 16.0 : 48.0),
           Align(
             alignment: Alignment.centerRight,
@@ -592,7 +592,7 @@ class MainScreen extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('4', style: context.sp(StyleRes.content64Blue)),
+                        Text('4', style: context.sp(StyleRes.content56Blue)),
                         SizedBox(width: 16.0),
                         Column(
                           mainAxisSize: MainAxisSize.min,
@@ -660,7 +660,7 @@ class MainScreen extends StatelessWidget {
               padding: EdgeInsets.only(
                 left: 64.0,
               ),
-              child: Text(title, style: context.sp(StyleRes.head24Red)),
+              child: Text(title, style: context.sp(StyleRes.head24Title)),
             ),
             Divider(
               color: ColorRes.btnBackRed,
@@ -693,7 +693,7 @@ class MainScreen extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(left: context.sw600 ? 32.0 : 96.0, right: 24.0),
-          child: Text('Студийное качество лекций', style: context.sp(StyleRes.head36Red)),
+          child: Text('Студийное качество лекций', style: context.sp(StyleRes.head36Title)),
         ),
         SizedBox(height: context.sw600 ? 16.0 : 48.0),
         Align(
@@ -754,7 +754,7 @@ class MainScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Surf — эксперт во Flutter', style: context.sp(StyleRes.head36Red)),
+          Text('Surf — эксперт во Flutter', style: context.sp(StyleRes.head36Title)),
           SizedBox(height: context.sw600 ? 16.0 : 48.0),
           Wrap(
             alignment: WrapAlignment.center,
@@ -802,19 +802,19 @@ class MainScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Опытные Flutter-разработчики научат', style: context.sp(StyleRes.head36Red)),
+          Text('Опытные Flutter-разработчики научат', style: context.sp(StyleRes.head36Title)),
           SizedBox(height: context.sw600 ? 16.0 : 48.0),
           Wrap(
             alignment: WrapAlignment.center,
             spacing: 40.0,
             runSpacing: 40.0,
             children: [
-              _buildSkillCard(context, IconRes.arch, '1. Проектировать архитектуру',
+              _buildSkillCard(context, IconRes.arch, '1. Проектировать архитектуру\n',
                   desc: 'кроссплатформенных приложений'),
-              _buildSkillCard(context, IconRes.dev, '2. Разрабатывать приложения', desc: 'на Dart и Flutter'),
-              _buildSkillCard(context, IconRes.anim, '3. Делать красивые анимации', desc: 'интерфейса'),
+              _buildSkillCard(context, IconRes.dev, '2. Разрабатывать приложения\n', desc: 'на Dart и Flutter'),
+              _buildSkillCard(context, IconRes.anim, '3. Делать красивые анимации\n', desc: 'интерфейса'),
               _buildSkillCard(context, IconRes.net, '4. Работать с сетью\n', desc: 'и хранением данных'),
-              _buildSkillCard(context, IconRes.inter, '5. Строить взаимодействие',
+              _buildSkillCard(context, IconRes.inter, '5. Строить взаимодействие\n',
                   desc: 'с платформой внутри фреймворка'),
               _buildSkillCard(context, IconRes.release, '6. Готовить к релизу\n',
                   desc: 'полноценное кроссплатформенное приложение'),
@@ -844,7 +844,7 @@ class MainScreen extends StatelessWidget {
               padding: EdgeInsets.only(
                 left: context.sw600 ? 64.0 : 96.0,
               ),
-              child: Text(title, style: context.sp(StyleRes.head24Red)),
+              child: Text(title, style: context.sp(StyleRes.head24Title)),
             ),
             if (desc != null)
               Divider(
@@ -867,7 +867,7 @@ class MainScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Преимущества курса', style: context.sp(StyleRes.head36Red)),
+          Text('Преимущества курса', style: context.sp(StyleRes.head36Title)),
           SizedBox(height: context.sw600 ? 16.0 : 48.0),
           Wrap(
             alignment: WrapAlignment.center,
@@ -920,7 +920,7 @@ class MainScreen extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 64.0),
-              child: Text(title, style: context.sp(StyleRes.head24Red)),
+              child: Text(title, style: context.sp(StyleRes.head24Title)),
             ),
             Divider(
               color: ColorRes.btnBackRed,
@@ -946,7 +946,7 @@ class MainScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('ЗАПИСАТЬСЯ НА КУРС', style: context.sp(StyleRes.head24Red)),
+            Text('ЗАПИСАТЬСЯ НА КУРС', style: context.sp(StyleRes.head24Title)),
             SizedBox(height: context.sw600 ? 2.0 : 8.0),
             Text('Старт занятий 5 марта 2021', style: context.sp(StyleRes.content20Blue)),
           ],
@@ -965,11 +965,11 @@ class MainScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: context.sw600 ? 100.0 : 156.0),
-            Text('ПРАКТИЧЕСКИЙ ОНЛАЙН-КУРС', style: context.sp(StyleRes.head24Red)),
+            Text('ПРАКТИЧЕСКИЙ ОНЛАЙН-КУРС', style: context.sp(StyleRes.head24Title)),
             SizedBox(height: context.sw600 ? 8.0 : 16.0),
             Text(
               'FLUTTER-РАЗРАБОТЧИК',
-              style: context.sp(StyleRes.head64Red),
+              style: context.sp(StyleRes.head56Title),
               semanticsLabel: 'HeaderSemantic',
             ),
             SizedBox(height: context.sw600 ? 8.0 : 16.0),
@@ -980,8 +980,8 @@ class MainScreen extends StatelessWidget {
         )),
         if (context.sw600) SizedBox(width: 24.0),
         if (!context.sw600)
-          Image.asset(
-            ImageRes.mainHeaderSuffix,
+          adaptiveIcon(
+            IconRes.mainHead,
             width: min(context.scWidth * .25, 400.0),
             height: min(context.scWidth * .25, 400.0),
             fit: BoxFit.cover,
