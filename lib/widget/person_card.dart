@@ -34,7 +34,7 @@ class PersonCard extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(name, style: context.sp(StyleRes.content32Blue)),
+        if (name != null) Text(name, style: context.sp(StyleRes.content32Blue)),
         SizedBox(height: 4.0),
         Stack(
           children: [

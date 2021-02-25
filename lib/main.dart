@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,7 @@ import 'package:webinar_demo/widget/message_card.dart';
 import 'package:webinar_demo/widget/person_card.dart';
 import 'package:webinar_demo/widget/primary_btn.dart';
 import 'package:webinar_demo/widget/simple_card.dart';
+import 'package:webinar_demo/widget/submit_form.dart';
 
 void main() {
   runApp(App());
@@ -23,6 +25,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: themeData,
       home: MainScreen(),
     );
   }
@@ -180,94 +183,69 @@ class MainScreen extends StatelessWidget {
           controller: MainScrollProvider.of(ctx).scrollController,
           physics: ClampingScrollPhysics(),
           children: [
-            _buildHeader(context),
-            SizedBox(height: context.sw600 ? 16.0 : 32.0),
-            _buildEnrollBtn(context),
+            // _buildHeader(context),
+            // SizedBox(height: context.sw600 ? 16.0 : 32.0),
+            // _buildEnrollBtn(context),
+            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            // _buildBenefits(context),
+            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            // _buildSkills(context),
+            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            // _buildProps(context),
+            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            // _buildVideoQuality(context),
+            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            // _buildLectures(context),
+            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            // _buildEnrollBtn2(context),
+            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            // _buildAfterCourse(context),
+            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            // _buildSert(context),
+            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            // _buildMentors(context),
+            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            // _buildTargets(context),
+            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            // _buildEnrollBtn(context),
             SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildBenefits(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildSkills(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildProps(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildVideoQuality(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildLectures(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildEnrollBtn2(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildAfterCourse(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildSert(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildMentors(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildTargets(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            _buildEnrollBtn(context),
-            SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            Padding(
-              padding: EdgeInsets.only(left: context.sw600 ? 32.0 : 96.0, right: 24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Даем основы, раскрываем секреты',
-                    style: context.sp(StyleRes.head36Title),
-                  ),
-                  SizedBox(height: context.sw600 ? 16.0 : 48.0),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: MessageCard(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(
-                            width: context.sw600 ? 220.0 : 360.0,
-                            child: Text(
-                              'Узнайте Flutter поближе и сделайте первые шаги во Flutter-разработке',
-                              textAlign: TextAlign.right,
-                              style: context.sp(StyleRes.content20Blue),
-                            ),
-                          ),
-                          if (!context.sw600) SizedBox(width: 20.0)
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: context.sw600 ? 16.0 : 48.0),
-                  Wrap(
-                    alignment: WrapAlignment.center,
-                    spacing: 40.0,
-                    runSpacing: 40.0,
-                    children: [
-                      _buildTargetCard(
-                        context,
-                        '10',
-                        'мастер-классов',
-                        'задать вопросы,\nпоработать над\nнешаблонными заданиями',
-                      ),
-                      _buildTargetCard(
-                        context,
-                        '48',
-                        'видеоуроков\n',
-                        'познакомиться с\nтеорией',
-                      ),
-                      _buildTargetCard(
-                        context,
-                        '57',
-                        'домашних заданий',
-                        'применить знания\nна практике',
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            _buildForm(context),
             SizedBox(height: context.sw600 ? 64.0 : 96.0),
           ],
         );
       }),
+    );
+  }
+
+  Widget _buildForm(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(left: context.sw600 ? 32.0 : 96.0, right: 24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: context.sw600 ? 64.0 : 96.0),
+          Text(
+            'Стоимость обучения',
+            style: context.sp(StyleRes.head36Title),
+          ),
+          SizedBox(height: context.sw600 ? 16.0 : 48.0),
+          Text(
+            '55 900₽',
+            style: context.sp(StyleRes.head56Title),
+          ),
+          Text(
+            '65 000₽',
+            style: context.sp(
+              StyleRes.head40Title.copyWith(
+                decoration: TextDecoration.lineThrough,
+                color: ColorRes.textYellow.withAlpha(100),
+              ),
+            ),
+          ),
+          SizedBox(height: context.sw600 ? 16.0 : 48.0),
+          Align(alignment: Alignment.topCenter, child: SubmitForm()),
+        ],
+      ),
     );
   }
 
@@ -290,20 +268,20 @@ class MainScreen extends StatelessWidget {
               _buildTargetCard(
                 context,
                 '10',
-                'мастер-классов',
-                'задать вопросы,\nпоработать над\nнешаблонными заданиями',
+                'мастер-классов\n',
+                'задать вопросы, поработать над нешаблонными заданиями',
               ),
               _buildTargetCard(
                 context,
                 '48',
                 'видеоуроков\n',
-                'познакомиться с\nтеорией',
+                'познакомиться с теорией',
               ),
               _buildTargetCard(
                 context,
                 '57',
-                'домашних заданий',
-                'применить знания\nна практике',
+                'домашних заданий\n',
+                'применить знания на практике',
               ),
             ],
           ),
