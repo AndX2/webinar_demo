@@ -33,7 +33,13 @@ Image adaptiveImage(
         );
 }
 
-Widget adaptiveIcon(String src, {double width, double height, BoxFit fit, Color color}) {
+Widget adaptiveIcon(
+  String src, {
+  double width,
+  double height,
+  BoxFit fit,
+  Color color,
+}) {
   return kIsWeb
       ? Image.network(
           src,

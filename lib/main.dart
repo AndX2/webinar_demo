@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:webinar_demo/conditional/youtube.dart';
 import 'package:webinar_demo/data.dart';
@@ -107,30 +108,20 @@ class MainScreen extends StatelessWidget {
                 Icon(
                   Icons.email,
                   color: ColorRes.textBlue,
-                  size: context.sw600 ? 56.0 : 72.0,
+                  size: context.sw600 ? 36.0 : 56.0,
                 ),
                 'электронная почта'.toUpperCase(),
-                () {},
+                () => launch('mailto:<EDUCATION@SURFSTUDIO.RU>'),
               ),
               _buildEndDrawerTile(
                 context,
                 Icon(
                   Icons.email,
                   color: ColorRes.textBlue,
-                  size: context.sw600 ? 56.0 : 72.0,
+                  size: context.sw600 ? 36.0 : 56.0,
                 ),
                 'telegram'.toUpperCase(),
-                () {},
-              ),
-              _buildEndDrawerTile(
-                context,
-                Icon(
-                  Icons.email,
-                  color: ColorRes.textBlue,
-                  size: context.sw600 ? 56.0 : 72.0,
-                ),
-                'whatsapp'.toUpperCase(),
-                () {},
+                () => launch('https://t.me/Surf_Flutter_Course_bot'),
               ),
             ],
           ),
@@ -151,7 +142,7 @@ class MainScreen extends StatelessWidget {
         child: Row(
           children: [
             icon,
-            Text(title, style: context.sp(StyleRes.content24Blue)),
+            Text(title, style: context.sp(StyleRes.content20Blue)),
           ],
         ),
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -183,31 +174,31 @@ class MainScreen extends StatelessWidget {
           controller: MainScrollProvider.of(ctx).scrollController,
           physics: ClampingScrollPhysics(),
           children: [
-            // _buildHeader(context),
-            // SizedBox(height: context.sw600 ? 16.0 : 32.0),
-            // _buildEnrollBtn(context),
-            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            // _buildBenefits(context),
-            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            // _buildSkills(context),
-            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            // _buildProps(context),
-            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            // _buildVideoQuality(context),
-            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            // _buildLectures(context),
-            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            // _buildEnrollBtn2(context),
-            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            // _buildAfterCourse(context),
-            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            // _buildSert(context),
-            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            // _buildMentors(context),
-            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            // _buildTargets(context),
-            // SizedBox(height: context.sw600 ? 64.0 : 96.0),
-            // _buildEnrollBtn(context),
+            _buildHeader(context),
+            SizedBox(height: context.sw600 ? 16.0 : 32.0),
+            _buildEnrollBtn(context),
+            SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            _buildBenefits(context),
+            SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            _buildSkills(context),
+            SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            _buildProps(context),
+            SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            _buildVideoQuality(context),
+            SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            _buildLectures(context),
+            SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            _buildEnrollBtn2(context),
+            SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            _buildAfterCourse(context),
+            SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            _buildSert(context),
+            SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            _buildMentors(context),
+            SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            _buildTargets(context),
+            SizedBox(height: context.sw600 ? 64.0 : 96.0),
+            _buildEnrollBtn(context),
             SizedBox(height: context.sw600 ? 64.0 : 96.0),
             _buildForm(context),
             SizedBox(height: context.sw600 ? 64.0 : 96.0),
@@ -229,17 +220,23 @@ class MainScreen extends StatelessWidget {
             style: context.sp(StyleRes.head36Title),
           ),
           SizedBox(height: context.sw600 ? 16.0 : 48.0),
-          Text(
-            '55 900₽',
-            style: context.sp(StyleRes.head56Title),
-          ),
-          Text(
-            '65 000₽',
-            style: context.sp(
-              StyleRes.head40Title.copyWith(
-                decoration: TextDecoration.lineThrough,
-                color: ColorRes.textYellow.withAlpha(100),
-              ),
+          MessageCard(
+            child: Column(
+              children: [
+                Text(
+                  '55 900₽',
+                  style: context.sp(StyleRes.head56Title),
+                ),
+                Text(
+                  '65 000₽',
+                  style: context.sp(
+                    StyleRes.head40Title.copyWith(
+                      decoration: TextDecoration.lineThrough,
+                      color: ColorRes.textYellow.withAlpha(160),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           SizedBox(height: context.sw600 ? 16.0 : 48.0),
@@ -665,6 +662,7 @@ class MainScreen extends StatelessWidget {
 
   Widget _buildVideoQuality(BuildContext context) {
     if (!kIsWeb && !Platform.isIOS && !Platform.isAndroid) return Container();
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -711,6 +709,7 @@ class MainScreen extends StatelessWidget {
               height = maxHeight;
               width = maxWidth;
             }
+
             return SizedBox(
               height: height,
               width: width,

@@ -73,6 +73,7 @@ final themeData = ThemeData(
       filled: true,
       fillColor: ColorRes.msgBackBlue,
       focusedBorder: UnderlineInputBorder(borderSide: BorderSide.none),
+      errorStyle: StyleRes.content20Blue.copyWith(color: ColorRes.textRed),
       enabledBorder: UnderlineInputBorder(
         borderRadius: BorderRadius.zero,
         borderSide: const BorderSide(color: Colors.transparent),
